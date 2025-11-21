@@ -5,21 +5,13 @@ title: Are men talking too much?
 
 
 <body>
-  <div class="alert alert-info alert-ga text-center" role="alert">
-    <a href="https://www.genderavenger.com/blog/are-men-talking-too-much" class="ga" target="_blank">
-      We're teaming up with GenderAvenger to measure #WhoTalks! Learn more &raquo;
-    </a>
-    <a class="icon-link" href="https://twitter.com/intent/tweet?text=I+just+watched+X.+men+talked+X%25+of+the+time!+%23WhoTalks" target="_blank">
-      &nbsp;&nbsp;<i class="fa fa-lg fa-twitter" aria-hidden="true"></i>
-    </a>
-  </div>
   <div class="content">
       <div class="row-fluid">
 
 
           <div class="col-sm-8 col-sm-offset-2 center">
             <br/>
-            <h3><span class="highlight"><i>check who's dominating the conversation</i></span></h3>
+            <h3><span class="highlight"><i>check if kids are focusing</i></span></h3>
             <br/>
 
             <h1>who's talking?</h1>
@@ -27,18 +19,18 @@ title: Are men talking too much?
 
             <div class="row-fluid" id="button-div">
               <div class="col-xs-6">
-                <a class="btn btn-lg btn-default" id="dude">a dude</a>
-                <p id="dude-display">00:00</p>
+                <a class="btn btn-lg btn-default" id="dude">focused</a>
+                <p id="focus-display">00:00</p>
               </div>
               <div class="col-xs-6">
-                <a class="btn btn-lg btn-default" id="not-dude">not a dude</a>
-                <p id="not-dude-display">00:00</p>
+                <a class="btn btn-lg btn-default" id="not-dude">not focused</a>
+                <p id="not-focus-display">00:00</p>
               </div>
             </div>
             <div class="clearfix"></div>
 
             <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <p class="small"><a class="muted-link" href="https://github.com/cathydeng/are-men-talking-too-much">made with ♡ by Cathy Deng</a></p>
+            <p class="small"><a class="muted-link" href="https://github.com/nsmader/are-kids-focusing-much">made by Cathy Deng, adapted by Nick Mader</a></p>
 
 
           </div>
@@ -60,7 +52,7 @@ title: Are men talking too much?
         active: false
       };
 
-      var not_dude = {
+      var not_focus = {
         time: {
           minutes: 0,
           seconds: 0,
@@ -69,12 +61,12 @@ title: Are men talking too much?
         active: false
       };
 
-      var dude_t;
-      var not_dude_t;
+      var focus_t;
+      var not_focus_t;
 
       var $ans = $('#ans');
-      var $dude = $('#dude');
-      var $not_dude = $('#not-dude');
+      var $focus = $('#focus');
+      var $not_focus = $('#not-focus');
 
       function num_pad(num) {
         if (num < 10) {
@@ -101,58 +93,58 @@ title: Are men talking too much?
           $(display_sel).html(num_pad(tally.minutes) + ':' + num_pad(tally.seconds));
         }
 
-        var d_tot = (dude.time.hours * 3600) + (dude.time.minutes * 60) + dude.time.seconds;
-        var l_tot = (not_dude.time.hours * 3600) + (not_dude.time.minutes * 60) + not_dude.time.seconds;
+        var d_tot = (focus.time.hours * 3600) + (focus.time.minutes * 60) + focus.time.seconds;
+        var l_tot = (not_focus.time.hours * 3600) + (not_focus.time.minutes * 60) + not_focus.time.seconds;
         var pct = parseInt(d_tot / (d_tot + l_tot) * 100, 10);
         $ans.html('<span id="pct">' + pct + '</span>% men');
       }
 
-      $dude.click(function() {
+      $focus.click(function() {
 
-        $dude.toggleClass('pressed');
+        $focus.toggleClass('pressed');
 
-        if (dude.active === true) {
-          dude.active = false;
-          clearInterval(dude_t);
+        if (focus.active === true) {
+          focus.active = false;
+          clearInterval(focus_t);
         } else {
-          dude.active = true;
-          if (not_dude.active === true) {
-            $not_dude.toggleClass('pressed');
-            not_dude.active = false;
-            clearInterval(not_dude_t);
+          focus.active = true;
+          if (not_focus.active === true) {
+            $not_focus.toggleClass('pressed');
+            not_focus.active = false;
+            clearInterval(not_focus_t);
           }
-          dude_t = setInterval(function() {
-            add(dude.time, '#dude-display');
+          focus_t = setInterval(function() {
+            add(focus.time, '#focus-display');
           }, 1000);
         }
 
       });
 
-      $not_dude.click(function() {
+      $not_focus.click(function() {
 
-        $not_dude.toggleClass('pressed');
+        $not_focus.toggleClass('pressed');
 
-        if (not_dude.active === true) {
-          not_dude.active = false;
-          clearInterval(not_dude_t);
+        if (not_focus.active === true) {
+          not_focus.active = false;
+          clearInterval(not_focus_t);
         } else {
-          not_dude.active = true;
-          if (dude.active === true) {
-            $dude.toggleClass('pressed');
-            dude.active = false;
-            clearInterval(dude_t);
+          not_focus.active = true;
+          if (focus.active === true) {
+            $focus.toggleClass('pressed');
+            focus.active = false;
+            clearInterval(focus_t);
           }
-          not_dude_t = setInterval(function() {
-            add(not_dude.time, '#not-dude-display');
+          not_focus_t = setInterval(function() {
+            add(not_focus.time, '#not-focus-display');
           }, 1000);
         }
       });
 
       $('body').keydown(function(e) {
         if (e.keyCode === 37) { // left
-          $dude.trigger('click');
+          $focus.trigger('click');
         } else if (e.keyCode === 39) { //right
-          $not_dude.trigger('click');
+          $not_focus.trigger('click');
         }
       });
 
