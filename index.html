@@ -37,8 +37,6 @@ title: Are men talking too much?
       </div>
   </div>
 
-  </body>
-
   <script type="text/javascript">
     $(function() {
       'use strict';
@@ -96,7 +94,7 @@ title: Are men talking too much?
         var d_tot = (focus.time.hours * 3600) + (focus.time.minutes * 60) + focus.time.seconds;
         var l_tot = (not_focus.time.hours * 3600) + (not_focus.time.minutes * 60) + not_focus.time.seconds;
         var pct = parseInt(d_tot / (d_tot + l_tot) * 100, 10);
-        $ans.html('<span id="pct">' + pct + '</span>% men');
+        $ans.html('<span id="pct">' + pct + '</span>% focused');
       }
 
       $focus.click(function() {
